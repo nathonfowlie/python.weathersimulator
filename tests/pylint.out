@@ -1,0 +1,7 @@
+************* Module weathersimulator.weather
+C:\Users\nathon\Documents\repositories\python.weathersimulator\weathersimulator\weather.py:308: [W0511(fixme), ] FIXME: An artificial limit of 9 degrees variation between dry and wet
+C:\Users\nathon\Documents\repositories\python.weathersimulator\weathersimulator\weather.py:57: [R0913(too-many-arguments), WeatherCondition.__init__] Too many arguments (7/5)
+
+------------------------------------------------------------------
+Your code has been rated at 9.83/10 (previous run: 9.83/10, +0.00)
+

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Locations",
+  "type": "array",
+  "minItems": 0,
+  "uniqueItems": true,
+  "items": {
+    "title": "Location",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "latitude": {
+        "type": "number"
+      },
+      "longitude": {
+        "type": "number"
+      },
+      "elevation": {
+        "type": "integer"
+      },
+      "temps": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "array",
+            "minItems": 12,
+            "maxItems": 12,
+            "items": {
+              "type": "number"
+            }
+          },
+          "max": {
+            "type": "array",
+            "minItems": 12,
+            "maxItems": 12,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "min",
+          "max"
+        ]
+      }
+    },
+    "required": [
+      "name",
+      "latitude",
+      "longitude",
+      "elevation",
+      "temps"
+    ]
+  }
+}

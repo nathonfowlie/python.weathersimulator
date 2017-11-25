@@ -34,21 +34,37 @@ the instructions provided further on in this document.
 * Townsville
 * Whyalla
 
-The simulator works by parsing location details loaded from a JSON data file, generating a random temperature within a
-given range, and calculating relative humidity, air pressure,  
+The simulator expects to be provided a JSON data file, which defines GPS co-ordinates and acceptable minimum/maximum 
+temperature for one or more locations (with an optional location name, such as 'Sydney', 'London' or 'New York').
 
+Based off this data it will generate a random temperature within the given range, and calculate approximate 
+air pressure, humidity and weather conditions.
+
+The generated weather data is returned to the caller in the following text format: 
 ```csv
-|Location name|Latitude,Longitude,Elevation|Local Time|Conditions|Temperature|Pressure|Relative Humidity|
+|Name|Position|Time|Conditions|Temperature|Pressure|Relative Humidity|
 ```
 
+|Field|Type|Description|Example|
+|-----|----|-----------|-------|
+|Name|string|Human-friendly location name.|'Sydney', 'New York', 'London'|
+|Position|string|Comma-seperated geo-graphical co-ordinates - latitude, longitude and elevation in metres.|-33.28397,149.10018,868|
+|Time|ISO8601 date/time|Locations local time, expressed in ISO8601 format.|2017-11-25T21:52:19.866418Z10:00|
+|Conditions|string|Weather conditions at the given location.|'Sunny', 'Rainy', 'Snowy'|
+|Temperature|number|Temperature in degrees celsius.|36.0, 2.0|
+|Pressure|number|Air pressure in hPa.|1145, 796, 1312|
+|Relative Humidity|number|Relative humidity expressed as a percentage.|45, 100, 20|
 
 ## Requirements
-* Python 3.6 or higher.
-
+Python 3.6 or higher is required, in addition to the following pip packages:
+* Arrow 0.11.0
+* Pytz 2017.3
+* TimeZoneFinder 2.1.2
+* Colorama 0.3.9
+* JsonSchema 2.6.0
 
 ## Installation
-Installation is as simple as cloning this repository. There are no additional package dependencies other than those that
-are bundled into the standard Python distribution (JSON, datetime, random and math modules).
+Installation is as simple as cloning this repository.
 
 
 ## Usage
