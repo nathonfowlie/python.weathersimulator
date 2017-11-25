@@ -62,6 +62,10 @@ Python 3.6 or higher is required, in addition to the following pip packages:
 * TimeZoneFinder 2.1.2
 * Colorama 0.3.9
 * JsonSchema 2.6.0
+* Argparse
+* PEP8
+* Nose
+* 
 
 ## Installation
 Installation is as simple as cloning this repository.
