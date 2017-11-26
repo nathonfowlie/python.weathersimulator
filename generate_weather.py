@@ -61,8 +61,6 @@ def validate_data_file(data_file):
 
     schema_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'weathersimulator', 'schemas', 'schema.json')
 
-    print(schema_file)
-
     with open(schema_file) as location_schema_file:
         schema = json.load(location_schema_file)
 
