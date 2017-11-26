@@ -68,8 +68,12 @@ Python 3.6 or higher is required, in addition to the following pip packages:
 * 
 
 ## Installation
-Installation is as simple as cloning this repository.
+```
+git clone https://github.com/nathonfowlie/python.weathersimulator.git weathersimulator
+cd weathersimulator
+make install
 
+```
 
 ## Usage
 ./generate_weather.py

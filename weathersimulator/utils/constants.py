@@ -9,8 +9,7 @@ Constants that are used by the weather simulator utility.
 # lapse_rate:       Kelvin per Metre
 ATMOSPHERIC_LAYER = [
     {
-        'name': 'Troposphere',
-        'height': 0,
+        'name': 'Troposphere', 'height': 0,
         'static_pressure': 101325.00,
         'standard_temp': 288.15,
         'lapse_rate': -0.0065

@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 import pytz
+import sys
 
 from arrow.parser import ParserError
 from colorama import Fore, init, deinit
@@ -11,8 +12,8 @@ from random import uniform
 from timezonefinder import TimezoneFinder
 
 from weathersimulator.weather import WeatherCondition
+from pkg_resources import get_distribution
 
-VERSION = '0.1'
 DEFAULT_DATA_FILE = 'data/locations.json'
 DEFAULT_START_DATE = '1970-01-01 00:00:00'
 DEFAULT_END_DATE = '1970-03-31 00:00:00'
@@ -27,25 +28,40 @@ def init_arg_parser():
     :return: Returns an argparse.ArgumentParser instance.
     """
     parser = argparse.ArgumentParser(description='Simple weather simulator which generates realistic weather data.')
+
     parser.add_argument('-v', '--version', help='show program version', action='store_true')
-    parser.add_argument('-f', '--file', help='JSON data file containing location definitions (default: data/locations.json).', action='store', dest='file', metavar='FILE', default=DEFAULT_DATA_FILE)
-    parser.add_argument('-s', '--start', help='Starting date for the generated weather data.', action='store', dest='start', metavar='DD/MM/YYYY', default=DEFAULT_START_DATE)
-    parser.add_argument('-e', '--end', help='Ending date for the generated weather data.', action='store', dest='end', metavar='DD/MM/YYYY', default=DEFAULT_END_DATE)
+
+    parser.add_argument('-f', '--file',
+                        help='JSON data file containing location definitions (default: data/locations.json).',
+                        action='store', dest='file', metavar='FILE', default=DEFAULT_DATA_FILE)
+
+    parser.add_argument('-s', '--start', help='Starting date for the generated weather data.', action='store',
+                        dest='start', metavar='DD/MM/YYYY', default=DEFAULT_START_DATE)
+
+    parser.add_argument('-e', '--end', help='Ending date for the generated weather data.', action='store', dest='end',
+                        metavar='DD/MM/YYYY', default=DEFAULT_END_DATE)
 
     return parser
 
 
+def get_script_path():
+    return os.path.dirname(os.path.realpath(sys.argv[0]))
+
 def validate_data_file(data_file):
     """
     Verifies that the data file is accessible and in the correct format.
+
     :param data_file: Relative or absolute path to the data file containing location information.
+
     :return: None
     """
     if not os.path.isfile(data_file):
         print(Fore.RED + 'Unable to locate data file - {0}.'.format(data_file))
         exit(0)
 
-    with open('schema.json') as location_schema_file:
+    schema_file = os.path.join(os.path.dirname(get_script_path()),'schema.json')
+
+    with open(schema_file) as location_schema_file:
         schema = json.load(location_schema_file)
 
     with open(data_file) as location_file:
@@ -63,10 +79,11 @@ def validate_args(args):
     Validates user input prior to execution of the weather simulator.
 
     :param args: User provided arguments.
+
     :return: Returns a dictionary containing the validated user arguments, including any default args.
     """
     if args.version:
-        print('Simple Weather Simulator {0}'.format(VERSION))
+        print('Simple Weather Simulator {0}'.format(get_distribution(__name__).version))
         exit(0)
 
     absolute_path = os.path.abspath(args.file) if args.file else os.path.abspath(DEFAULT_DATA_FILE)
@@ -90,6 +107,7 @@ def validate_args(args):
 def generate(start_date, end_date, data_file):
     """
     Generates the weather data and outputs to stdout.
+
     :param data_file: Absolute path to the source data file.
     :param start_date: The starting date to begin generating weather data for.
     :param end_date: The end date to stop generating weather date for.
@@ -127,6 +145,7 @@ def generate(start_date, end_date, data_file):
 def main():
     """
     Main entrypoint for the weather simulator.
+
     :return: Returns a non-zero code on error.
     """
     # Initialise colorama for coloured terminal output

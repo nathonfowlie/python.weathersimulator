@@ -1,16 +1,16 @@
-from nose.tools import assert_equals, assert_raises
+from nose.tools import assert_equal, assert_raises
 from weathersimulator.weather import WeatherCondition
 
 def test_WeatherCondition_init():
     wc1 = WeatherCondition(name='MyCity', latitude=-32.4566, longitude=158.246912, elevation=345, temperature=15)
-    assert_equals(wc1.name, 'MyCity')
-    assert_equals(wc1.latitude, -32.4566)
-    assert_equals(wc1.longitude, 158.246912)
-    assert_equals(wc1.elevation, 345)
-    assert_equals(wc1.temperature, 15)
+    assert_equal(wc1.name, 'MyCity')
+    assert_equal(wc1.latitude, -32.4566)
+    assert_equal(wc1.longitude, 158.246912)
+    assert_equal(wc1.elevation, 345)
+    assert_equal(wc1.temperature, 15)
 
     wc2 = WeatherCondition(latitude=-32.4566, longitude=158.246912, elevation=345, temperature=15)
-    assert_equals(wc2.name, None)
+    assert_equal(wc2.name, None)
 
 
 def test_WeatherCondition_init_missing_parameter_throws_TypeError():
