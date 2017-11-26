@@ -33,7 +33,7 @@ build: _virtualenv
 	python setup.py egg_info -Db "" sdist bdist_egg
 
 install:
-	python setuptools.py install
+	python setup.py install
 
 develop: _virtualenv
 	$(info ********** Installing Development version **********)
