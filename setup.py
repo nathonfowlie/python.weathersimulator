@@ -12,10 +12,10 @@ setup(
     url='https://github.com/nathonfowlie/python.weathersimulator',
     setup_requires=['setuptools_scm'],
     tests_require=['mock', 'pycodestyle', 'nose', 'coverage'],
+    include_package_data=True,
     package_data={
-        '': ['data/*.json']
+        'weathersimulator': ['schemas/*.json']
     },
     test_suite='nose.collector'
-
-)# blah
+)
 

@@ -59,7 +59,7 @@ def validate_data_file(data_file):
         print(Fore.RED + 'Unable to locate data file - {0}.'.format(data_file))
         exit(0)
 
-    schema_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schema.json')
+    schema_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'weathersimulator', 'schemas', 'schema.json')
 
     print(schema_file)
 

@@ -75,6 +75,15 @@ make install
 
 ```
 
+
+## Known Issues
+This module currently doesn't install correctly due to an issue with the ```schemas``` folder. The folder appears to be
+included in the Egg, but it doesn't seem to get deployed at installation time. This causes the utility to crash as it
+can't find a critical file needed to validate the location data file.
+
+For the time being generate_weather.py will need to be executed from within the git checkout directory.
+
+
 ## Usage
 ./generate_weather.py
 
