@@ -59,7 +59,9 @@ def validate_data_file(data_file):
         print(Fore.RED + 'Unable to locate data file - {0}.'.format(data_file))
         exit(0)
 
-    schema_file = os.path.join(os.path.dirname(get_script_path()),'schema.json')
+    schema_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schema.json')
+
+    print(schema_file)
 
     with open(schema_file) as location_schema_file:
         schema = json.load(location_schema_file)
