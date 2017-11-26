@@ -305,12 +305,12 @@ class WeatherCondition(object):  # pylint: disable=R0902
         self.__wetbulb_temp = uniform(self.min_temperature, self.temperature)
 
         # saturation vapour pressure for dry bulb
-        dry_temp_in_k = 237.3 + self.temperature
+        dry_temp_in_k = self.__celsius_to_kelvin(self.temperature)
         equation_1 = 17.27 * self.temperature
         sat_vap_pressure_dry = 6.108 * (math.exp(equation_1 / dry_temp_in_k))
 
         # saturation vapour pressure for wet bulb
-        wet_temp_in_k = 237.3 + self.wetbulb_temp
+        wet_temp_in_k = self.__celsius_to_kelvin(self.wetbulb_temp)
         equation_2 = 17.27 * self.wetbulb_temp
         sat_vap_pressure_wet = 6.108 * (math.exp(equation_2 / wet_temp_in_k))
 
@@ -331,6 +331,18 @@ class WeatherCondition(object):  # pylint: disable=R0902
         # Round up to nearest whole number, purely because I've never seen a fractional humidity figure on the news or
         # in any of the sources I used to determine how to calculate humidity/pressure.
         self.__humidity = humidity
+
+
+    def __celsius_to_kelvin(self, temperature):
+        """
+        Converts degrees celsius to Kelvin.
+
+        :param temperature: The temperature (celsius) to be converted to Kelvin.
+
+        :return: The same temperature expressed in Kelvin
+        """
+        return temperature + 237.3
+
 
     def __str__(self):
         """
