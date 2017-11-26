@@ -10,7 +10,8 @@ import math
 import arrow
 import six
 
-from weathersimulator.utils.constants import ATMOSPHERIC_LAYER, EARTH_AIR_MOLAR_MASS, GRAVITY, UNIVERSAL_GAS_CONSTANT
+from weathersimulator.utils.constants import ATMOSPHERIC_LAYER, EARTH_AIR_MOLAR_MASS, GRAVITY, UNIVERSAL_GAS_CONSTANT,\
+    CALIBRATION_TEMPERATURE
 
 
 # The following resources were used to create the formulas used for air
@@ -307,12 +308,12 @@ class WeatherCondition(object):  # pylint: disable=R0902
         # saturation vapour pressure for dry bulb
         dry_temp_in_k = self.__celsius_to_kelvin(self.temperature)
         equation_1 = 17.27 * self.temperature
-        sat_vap_pressure_dry = 6.108 * (math.exp(equation_1 / dry_temp_in_k))
+        sat_vap_pressure_dry = CALIBRATION_TEMPERATURE * (math.exp(equation_1 / dry_temp_in_k))
 
         # saturation vapour pressure for wet bulb
         wet_temp_in_k = self.__celsius_to_kelvin(self.wetbulb_temp)
         equation_2 = 17.27 * self.wetbulb_temp
-        sat_vap_pressure_wet = 6.108 * (math.exp(equation_2 / wet_temp_in_k))
+        sat_vap_pressure_wet = CALIBRATION_TEMPERATURE * (math.exp(equation_2 / wet_temp_in_k))
 
         # actual vapour pressure
         temp_diff = self.temperature - self.wetbulb_temp
