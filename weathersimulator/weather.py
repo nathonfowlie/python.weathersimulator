@@ -305,12 +305,12 @@ class WeatherCondition(object):  # pylint: disable=R0902
         self.__min_temperature = uniform(self.temperature - WeatherCondition.__WETBULB_MAX_DEVIATION, self.temperature)
         self.__wetbulb_temp = uniform(self.min_temperature, self.temperature)
 
-        # saturation vapour pressure for dry bulb
+        # saturation vapour pressure for dry bulb (Tentens equation)
         dry_temp_in_k = self.__celsius_to_kelvin(self.temperature)
         equation_1 = 17.27 * self.temperature
         sat_vap_pressure_dry = CALIBRATION_TEMPERATURE * (math.exp(equation_1 / dry_temp_in_k))
 
-        # saturation vapour pressure for wet bulb
+        # saturation vapour pressure for wet bulb (Tentens equation)
         wet_temp_in_k = self.__celsius_to_kelvin(self.wetbulb_temp)
         equation_2 = 17.27 * self.wetbulb_temp
         sat_vap_pressure_wet = CALIBRATION_TEMPERATURE * (math.exp(equation_2 / wet_temp_in_k))
